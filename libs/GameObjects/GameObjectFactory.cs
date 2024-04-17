@@ -5,7 +5,7 @@ public class GameObjectFactory : IGameObjectFactory
     public GameObject CreateGameObject(dynamic obj) {
 
         GameObject newObj = new GameObject();
-        int type = obj.Type;
+        int type = (int) obj.Type;
 
         switch (type)
         {
@@ -29,5 +29,28 @@ public class GameObjectFactory : IGameObjectFactory
         }
 
         return newObj;
+    }
+    
+    public GameObject LoadGameObject(dynamic obj)
+    {
+        int type = (int) obj.Type;
+
+        switch (type)
+        {
+            case (int) GameObjectType.Player:
+                Player.Instance.PosX = obj.PosX;
+                Player.Instance.PosY = obj.PosY;
+                return Player.Instance;
+            case (int) GameObjectType.Obstacle:
+                return (Obstacle) obj;
+            case (int) GameObjectType.Box:
+                return (Box) obj;
+            case (int) GameObjectType.BoxGoal:
+                return (BoxGoal) obj;
+            case (int) GameObjectType.BoxOnGoal:
+                return (BoxOnGoal) obj;
+        }
+
+        return null;
     }
 }

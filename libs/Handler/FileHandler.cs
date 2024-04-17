@@ -21,7 +21,7 @@ public static class FileHandler
         };
     }
 
-    public static dynamic ReadJson()
+    public static dynamic ReadJson(string fileName)
     {
         if (string.IsNullOrEmpty(filePath))
         {
@@ -30,7 +30,7 @@ public static class FileHandler
 
         try
         {
-            string jsonContent = File.ReadAllText(filePath);
+            string jsonContent = File.ReadAllText(filePath + "/" + fileName);
             dynamic jsonData = JsonConvert.DeserializeObject(jsonContent);
             return jsonData;
         }
@@ -43,4 +43,12 @@ public static class FileHandler
             throw new Exception($"Error reading JSON file: {ex.Message}");
         }
     }
+    
+    public static int CountLevelFiles()
+    {
+        string[] jsonLevelFiles = Directory.GetFiles(filePath, "*.json", SearchOption.TopDirectoryOnly);
+
+        return jsonLevelFiles.Length;
+    }
+
 }

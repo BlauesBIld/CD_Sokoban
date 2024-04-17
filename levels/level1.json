@@ -21,21 +21,9 @@
         "PosY": 13
       },
       {
-        "Type": 2,
-        "Color": 6,
-        "PosX": 10,
-        "PosY": 5
-      },
-      {
         "Type": 3,
         "PosX": 25,
         "PosY": 10
-      },
-      {
-        "Type": 2,
-        "Color": 6,
-        "PosX": 15,
-        "PosY": 7
       },
       {
         "Type": 3,

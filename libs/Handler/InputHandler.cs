@@ -1,3 +1,5 @@
+using System;
+
 namespace libs;
 
 public sealed class InputHandler{
@@ -28,23 +30,34 @@ public sealed class InputHandler{
             // Handle keyboard input to move the player
             switch (keyInfo.Key)
             {
-                case ConsoleKey.UpArrow:
+                case ConsoleKey.UpArrow: 
+                case ConsoleKey.W:
                     focusedObject.Move(0, -1);
                     break;
                 case ConsoleKey.DownArrow:
+                case ConsoleKey.S:
                     focusedObject.Move(0, 1);
                     break;
                 case ConsoleKey.LeftArrow:
+                case ConsoleKey.A:
                     focusedObject.Move(-1, 0);
                     break;
                 case ConsoleKey.RightArrow:
+                case ConsoleKey.D:
                     focusedObject.Move(1, 0);
+                    break;
+                case ConsoleKey.Escape:
+                    Environment.Exit(0);
+                    break;
+                case ConsoleKey.Enter:
+                    GameEngine.Instance.IncreaseLevel();
+                    break;
+                case ConsoleKey.R:
+                    GameEngine.Instance.UndoMove();
                     break;
                 default:
                     break;
             }
         }
-        
     }
-
 }

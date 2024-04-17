@@ -64,9 +64,14 @@ public class GameObject : IGameObject, IMovement
 
     public int Move(int dx, int dy)
     {
+        if(this is Player)
+        {
+            GameEngine.Instance.SaveState();
+        }
         GameObject fieldToMoveOn = GameEngine.Instance.GetMap().Get(_posY + dy, _posX + dx);
         if( fieldToMoveOn is Obstacle)
         {
+            GameEngine.Instance.states.Remove(GameEngine.Instance.states.Last());
             return 0;
         }
         if (fieldToMoveOn is Box && this is Player)
@@ -74,6 +79,7 @@ public class GameObject : IGameObject, IMovement
             Box box = (Box)fieldToMoveOn;
             if(box.Move(dx, dy) == 0)
             {
+                GameEngine.Instance.states.Remove(GameEngine.Instance.states.Last());
                 return 0;
             }
         }
@@ -89,6 +95,7 @@ public class GameObject : IGameObject, IMovement
             _prevPosX = _posX;
             _prevPosY = _posY;
             Remove();
+            GameEngine.Instance.RemoveFromBoxesInCurrentLevel();
             return 1;
         }
         _prevPosX = _posX;
@@ -102,5 +109,10 @@ public class GameObject : IGameObject, IMovement
     {
         _posX = -1;
         _posY = -1;
+    }
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
     }
 }
