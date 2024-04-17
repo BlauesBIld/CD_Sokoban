@@ -62,10 +62,16 @@ public class GameObject : IGameObject, IMovement
         return _prevPosX;
     }
 
-    public void Move(int dx, int dy) {
+    public int Move(int dx, int dy) {
+        GameObject fieldToMoveOn = GameEngine.Instance.GetMap().Get(_posY + dy, _posX + dx);
+        if( fieldToMoveOn is Obstacle)
+        {
+            return 0;
+        }
         _prevPosX = _posX;
         _prevPosY = _posY;
         _posX += dx;
         _posY += dy;
+        return 1;
     }
 }

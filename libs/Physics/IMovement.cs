@@ -5,7 +5,7 @@ namespace libs;
 
 public interface IMovement
 {
-    void Move(int dx, int dy); 
+    int Move(int dx, int dy); 
 
 }
 
