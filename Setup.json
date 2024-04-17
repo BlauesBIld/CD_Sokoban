@@ -1,7 +1,7 @@
 {
   "map": {
     "width": 10,
-    "height": 8 
+    "height": 8
   },
   "gameObjects": [
     {
@@ -25,12 +25,6 @@
     {
       "Type": 1,
       "Color": 3,
-      "PosX": 0,
-      "PosY": 0
-    },
-    {
-      "Type": 1,
-      "Color": 3,
       "PosX": 1,
       "PosY": 0
     },
@@ -51,7 +45,7 @@
       "Color": 3,
       "PosX": 4,
       "PosY": 0
-    },    
+    },
     {
       "Type": 1,
       "Color": 3,
@@ -213,6 +207,12 @@
       "Color": 3,
       "PosX": 9,
       "PosY": 6
+    },
+    {
+      "Type": 3,
+      "Color": 3,
+      "PosX": 4,
+      "PosY": 4
     },
     {
       "Type": 1,

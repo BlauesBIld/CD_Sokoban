@@ -90,12 +90,17 @@ public sealed class GameEngine
         gameObjects.Add(gameObject);
     }
 
-    private void PlaceGameObjects(){
-        
+     private void PlaceGameObjects()
+    {
+
         gameObjects.ForEach(delegate(GameObject obj)
         {
-            map.Set(obj);
+            if (obj is not Player)
+            {
+                map.Set(obj);
+            }
         });
+        map.Set(Player.Instance);
     }
 
     private void DrawObject(GameObject gameObject){
