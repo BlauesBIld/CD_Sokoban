@@ -11,7 +11,7 @@ public sealed class GameEngine
 {
     private static GameEngine? _instance;
     private IGameObjectFactory gameObjectFactory;
-    string currentLevelName = "Tutorial Level";
+    string currentLevelName = "Level 0 - Intro";
     private int currentLevel = 0;
     private int totalAmountOfLevels = FileHandler.CountLevelFiles();
     private int amountOfBoxesInCurrentLevel = 0;
