@@ -62,16 +62,45 @@ public class GameObject : IGameObject, IMovement
         return _prevPosX;
     }
 
-    public int Move(int dx, int dy) {
+    public int Move(int dx, int dy)
+    {
         GameObject fieldToMoveOn = GameEngine.Instance.GetMap().Get(_posY + dy, _posX + dx);
         if( fieldToMoveOn is Obstacle)
         {
             return 0;
+        }
+        if (fieldToMoveOn is Box && this is Player)
+        {
+            Box box = (Box)fieldToMoveOn;
+            if(box.Move(dx, dy) == 0)
+            {
+                return 0;
+            }
+        }
+        if(fieldToMoveOn is BoxGoal && this is Box)
+        {
+            BoxOnGoal boxOnGoal = new BoxOnGoal();
+            boxOnGoal.PosX = fieldToMoveOn.PosX;
+            boxOnGoal.PosY = fieldToMoveOn.PosY;
+            GameEngine.Instance.AddGameObject(boxOnGoal);
+            
+            BoxGoal boxGoal = (BoxGoal)fieldToMoveOn;
+            boxGoal.Remove();
+            _prevPosX = _posX;
+            _prevPosY = _posY;
+            Remove();
+            return 1;
         }
         _prevPosX = _posX;
         _prevPosY = _posY;
         _posX += dx;
         _posY += dy;
         return 1;
+    }
+
+    public void Remove()
+    {
+        _posX = -1;
+        _posY = -1;
     }
 }

@@ -22,7 +22,10 @@ public class GameObjectFactory : IGameObjectFactory
                 break;
             case (int) GameObjectType.BoxGoal:
                 newObj = obj.ToObject<BoxGoal>();
-                break;    
+                break;
+            case (int) GameObjectType.BoxOnGoal:
+                newObj = obj.ToObject<BoxOnGoal>();
+                break; 
         }
 
         return newObj;

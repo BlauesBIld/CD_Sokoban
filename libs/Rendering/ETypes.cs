@@ -4,5 +4,6 @@ public enum GameObjectType
   Obstacle,
   Box,
   BoxGoal,
+  BoxOnGoal,
   Floor
 }
