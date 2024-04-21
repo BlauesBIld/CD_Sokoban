@@ -195,7 +195,7 @@ public sealed class GameEngine
     {
         State state = new State( Player.Instance.PosX, Player.Instance.PosY, gameObjects);
         states.Add(state);
-        
+        FileHandler.WriteJson("savegame.json", states.Last());
     }
     
     public void UndoMove()

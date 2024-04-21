@@ -43,6 +43,24 @@ public static class FileHandler
             throw new Exception($"Error reading JSON file: {ex.Message}");
         }
     }
+
+    public static void WriteJson(string fileName, State state)
+    {
+        if (string.IsNullOrEmpty(filePath))
+        {
+            throw new InvalidOperationException("JSON file path not provided in environment variable");
+        }
+
+        try
+        {
+            string jsonContent = JsonConvert.SerializeObject(state);
+            File.WriteAllText(filePath + "/" + fileName, jsonContent);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error writing JSON file: {ex.Message}");
+        }
+    }
     
     public static int CountLevelFiles()
     {
