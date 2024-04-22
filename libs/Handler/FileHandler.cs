@@ -21,7 +21,7 @@ public static class FileHandler
         };
     }
 
-    public static dynamic ReadJson(string fileName)
+    public static dynamic ReadJson(string assetsPathToFile)
     {
         if (string.IsNullOrEmpty(filePath))
         {
@@ -30,7 +30,7 @@ public static class FileHandler
 
         try
         {
-            string jsonContent = File.ReadAllText(filePath + "/" + fileName);
+            string jsonContent = File.ReadAllText(filePath + assetsPathToFile);
             dynamic jsonData = JsonConvert.DeserializeObject(jsonContent);
             return jsonData;
         }
@@ -44,7 +44,7 @@ public static class FileHandler
         }
     }
 
-    public static void WriteJson(string fileName, State state)
+    public static void WriteJson(string assetsPathToFile, object objectToWrite)
     {
         if (string.IsNullOrEmpty(filePath))
         {
@@ -53,8 +53,8 @@ public static class FileHandler
 
         try
         {
-            string jsonContent = JsonConvert.SerializeObject(state);
-            File.WriteAllText(filePath + "/" + fileName, jsonContent);
+            string jsonContent = JsonConvert.SerializeObject(objectToWrite, Formatting.Indented);
+            File.WriteAllText(filePath + assetsPathToFile, jsonContent);
         }
         catch (Exception ex)
         {
@@ -64,9 +64,31 @@ public static class FileHandler
     
     public static int CountLevelFiles()
     {
-        string[] jsonLevelFiles = Directory.GetFiles(filePath, "*.json", SearchOption.TopDirectoryOnly);
+        string[] jsonLevelFiles = Directory.GetFiles(filePath + "/levels/", "*.json", SearchOption.TopDirectoryOnly);
 
         return jsonLevelFiles.Length;
+    }
+    
+    public static bool SaveExists(int saveSlot)
+    {
+        return File.Exists(filePath + "/saves/save" + saveSlot + ".json");
+    }
+    
+    public static void SaveGame(Save save, int saveSlot)
+    {
+        WriteJson("/saves/save" + saveSlot + ".json", save);
+    }
+    
+    public static Save GetSave(int saveSlot)
+    {
+        dynamic saveData = ReadJson("/saves/save" + saveSlot + ".json");
+        Save save = new Save();
+        save.MapState = JsonConvert.DeserializeObject<State>(saveData.MapState.ToString());
+        save.CurrentLevel = saveData.CurrentLevel;
+        save.MapHeight = saveData.MapHeight;
+        save.MapWidth = saveData.MapWidth;
+        save.SaveTimeStamp = saveData.SaveTimeStamp;
+        return save;
     }
 
 }

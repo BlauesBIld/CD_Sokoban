@@ -17,4 +17,8 @@ public class State
                 gameObjects.Add(gameObject.Clone());
         }
     }
+    
+    public State()
+    {
+    }
 }

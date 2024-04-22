@@ -55,6 +55,56 @@ public sealed class InputHandler{
                 case ConsoleKey.R:
                     GameEngine.Instance.UndoMove();
                     break;
+                case ConsoleKey.D1:
+                    if (keyInfo.Modifiers == ConsoleModifiers.Shift)
+                    {
+                        GameEngine.Instance.LoadGame(1);
+                    }
+                    else
+                    {
+                        GameEngine.Instance.SaveGame(1);
+                    }
+                    break;
+                case ConsoleKey.D2:
+                    if (keyInfo.Modifiers == ConsoleModifiers.Shift)
+                    {
+                        GameEngine.Instance.LoadGame(2);
+                    }
+                    else
+                    {
+                        GameEngine.Instance.SaveGame(2);
+                    }
+                    break;
+                case ConsoleKey.D3:
+                    if (keyInfo.Modifiers == ConsoleModifiers.Shift)
+                    {
+                        GameEngine.Instance.LoadGame(3);
+                    }
+                    else
+                    {
+                        GameEngine.Instance.SaveGame(3);
+                    }
+                    break;
+                case ConsoleKey.D4:
+                    if (keyInfo.Modifiers == ConsoleModifiers.Shift)
+                    {
+                        GameEngine.Instance.LoadGame(4);
+                    }
+                    else
+                    {
+                        GameEngine.Instance.SaveGame(4);
+                    }
+                    break;
+                case ConsoleKey.D5:
+                    if (keyInfo.Modifiers == ConsoleModifiers.Shift)
+                    {
+                        GameEngine.Instance.LoadGame(5);
+                    }
+                    else
+                    {
+                        GameEngine.Instance.SaveGame(5);
+                    }
+                    break;
                 default:
                     break;
             }
